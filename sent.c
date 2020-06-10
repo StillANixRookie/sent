@@ -685,8 +685,10 @@ usage()
 int
 main(int argc, char *argv[])
 {
+	int i;
 	FILE *fp = NULL;
 
+/*
 	ARGBEGIN {
 	case 'v':
 		fprintf(stderr, "sent-"VERSION"\n");
@@ -694,11 +696,56 @@ main(int argc, char *argv[])
 	default:
 		usage();
 	} ARGEND
+*/
 
+/*
 	if (!argv[0] || !strcmp(argv[0], "-"))
 		fp = stdin;
 	else if (!(fp = fopen(fname = argv[0], "r")))
 		die("sent: Unable to open '%s' for reading:", fname);
+	else
+		fp = fopen(fname = argv[0], "r");
+*/
+
+/*
+	for (i = 1; i < argc; i++)
+		if (!strcmp(argv[i], "-v")) {
+			fprintf(stderr, "sent-"VERSION"\n");
+			return 0;
+		} else if (!strcmp(argv[i], "-fn"))
+			fontfallbacks[0] = argv[++i];
+		else if (!strcmp(argv[i], "-fg"))
+			colors[0] = argv[++i];
+		else if (!strcmp(argv[i], "-bg"))
+			colors[1] = argv[++i];
+		else
+			colors[1] = argv[++i];
+*/
+
+
+	for (i = 1; i < argc; i++)
+		if (!strcmp(argv[i], "-v")) {
+			fprintf(stderr, "sent-"VERSION"\n");
+			return 0;
+		} else if (!strcmp(argv[i], "-fn"))
+			fontfallbacks[0] = argv[++i];
+		else if (!strcmp(argv[i], "-fg"))
+			colors[0] = argv[++i];
+		else if (!strcmp(argv[i], "-bg"))
+			colors[1] = argv[++i];
+		else if (!strcmp(argv[i], "-uw"))
+			usablewidth = atof(argv[++i]);
+		else if (!strcmp(argv[i], "-uh"))
+			usableheight = atof(argv[++i]);
+		else if (!strcmp(argv[i], "-ls"))
+			linespacing = atof(argv[++i]);
+
+
+	if (!strcmp(argv[argc-1], "-"))
+		fp = stdin;
+	else if (!(fp = fopen(fname = argv[argc-1], "r")))
+		die("sent: Unable to open '%s' for reading:", fname);
+
 	load(fp);
 	fclose(fp);
 

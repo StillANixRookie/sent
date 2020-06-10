@@ -1,23 +1,25 @@
 /* See LICENSE file for copyright and license details. */
 
 static char *fontfallbacks[] = {
-	"dejavu sans",
+	"cmusansserif",
+	"luximono",
+	"monospace",
 	"roboto",
 	"ubuntu",
 };
 #define NUMFONTSCALES 42
 #define FONTSZ(x) ((int)(10.0 * powf(1.1288, (x)))) /* x in [0, NUMFONTSCALES-1] */
 
-static const char *colors[] = {
+static char *colors[] = {
 	"#000000", /* foreground color */
 	"#FFFFFF", /* background color */
 };
 
-static const float linespacing = 1.4;
+static float linespacing = 1.4;
 
 /* how much screen estate is to be used at max for the content */
-static const float usablewidth = 0.75;
-static const float usableheight = 0.75;
+static float usablewidth = 0.95;
+static float usableheight = 0.95;
 
 static Mousekey mshortcuts[] = {
 	/* button         function        argument */
