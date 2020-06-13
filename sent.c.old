@@ -537,12 +537,6 @@ xdraw()
 			         0,
 			         slides[idx].lines[i],
 			         0);
-		if (idx != 0 && progressheight != 0) {
-			drw_rect(d,
-			         0, xw.h - progressheight,
-			         (xw.w * idx)/(slidecount - 1), progressheight,
-			         1, 0);
-		}
 		drw_map(d, xw.win, 0, 0, xw.w, xw.h);
 	} else {
 		if (!(im->state & SCALED))
@@ -685,20 +679,14 @@ configure(XEvent *e)
 void
 usage()
 {
-	fputs("usage: sent [-hv] [-fn font]\n"
-	      "            [-uw height] [-uh xoffset] [-ls xoffset]\n"
-	      "            [-fg color] [-bg color]\n"
-	      "            FILE\n", stderr);
-	exit(1);
+	die("usage: %s [file]", argv0);
 }
 
 int
 main(int argc, char *argv[])
 {
-	int i;
 	FILE *fp = NULL;
 
-/*
 	ARGBEGIN {
 	case 'v':
 		fprintf(stderr, "sent-"VERSION"\n");
@@ -706,34 +694,11 @@ main(int argc, char *argv[])
 	default:
 		usage();
 	} ARGEND
-*/
 
-	for (i = 1; i < argc; i++)
-		if (!strcmp(argv[i], "-h"))
-			usage();
-		else if (!strcmp(argv[i], "-v")) {
-			fprintf(stderr, "sent-"VERSION"\n");
-			return 0;
-		} else if (!strcmp(argv[i], "-fn"))
-			fontfallbacks[0] = argv[++i];
-		else if (!strcmp(argv[i], "-fg"))
-			colors[0] = argv[++i];
-		else if (!strcmp(argv[i], "-bg"))
-			colors[1] = argv[++i];
-		else if (!strcmp(argv[i], "-uw"))
-			usablewidth = atof(argv[++i]);
-		else if (!strcmp(argv[i], "-uh"))
-			usableheight = atof(argv[++i]);
-		else if (!strcmp(argv[i], "-ls"))
-			linespacing = atof(argv[++i]);
-
-	if (argc < 2)
-		usage();
-	else if (!strcmp(argv[argc-1], "-"))
+	if (!argv[0] || !strcmp(argv[0], "-"))
 		fp = stdin;
-	else if (!(fp = fopen(fname = argv[argc-1], "r")))
+	else if (!(fp = fopen(fname = argv[0], "r")))
 		die("sent: Unable to open '%s' for reading:", fname);
-
 	load(fp);
 	fclose(fp);
 
