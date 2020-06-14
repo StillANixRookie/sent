@@ -18,8 +18,8 @@ static char *colors[] = {
 static float linespacing = 1.4;
 
 /* how much screen estate is to be used at max for the content */
-static float usablewidth = 0.95;
-static float usableheight = 0.95;
+static float usablewidth = 0.75;
+static float usableheight = 0.75;
 
 /* height of the presentation progress bar */
 static const int progressheight = 5;
@@ -52,6 +52,7 @@ static Shortcut shortcuts[] = {
 	{ XK_n,           advance,        {.i = +1} },
 	{ XK_p,           advance,        {.i = -1} },
 	{ XK_r,           reload,         {0} },
+	{ XK_g,           pdf,           {0} },
 };
 
 static Filter filters[] = {

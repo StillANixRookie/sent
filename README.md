@@ -10,10 +10,20 @@ The presentation is displayed in a simple X11 window. The content of each slide
 is automatically scaled to fit the window and centered so you also don't have to
 worry about alignment. Instead you can really concentrate on the content.
 
+## My patches
+
+- [x] cmdline options
+	- for colours, font, usable height/width, and line ratio
+	- not the same one on [the suckless website](https://tools.suckless.org/sent/patches/cmdline_options/)
+- [x] [progress bar](https://tools.suckless.org/sent/patches/progress-bar/)
+- [x] save to pdf
+	- uses [BigHeadGeorge's `sent-pdf` patches](https://github.com/BigHeadGeorge/sent-pdf)
+
 # Dependencies
 
 You need `Xlib` and `Xft` to build sent and the `farbfeld` tools installed to use
-images in your presentations.
+images in your presentations.  
+`cairo` is also required for the save to pdf function.
 
 # Demo
 
@@ -28,7 +38,10 @@ You can navigate with the arrow keys and quit with `q`.
 # Usage
 
 ```
-	sent [FILE]
+sent [-hv] [-fn font]
+     [-uw height] [-uh xoffset] [-ls xoffset]
+     [-fg color] [-bg color]
+     FILE
 ```
 
 If FILE is omitted or equals `-`, stdin will be read. Produce image slides by
@@ -55,11 +68,3 @@ with `#` will be ignored. A `\` at the beginning of the line escapes `@` and
 	
 	thanks / questions?
 ```
-
-
-# Development
-
-`sent` is developed at http://tools.suckless.org/sent
-
-
-0: http://tools.suckless.org/farbfeld/
