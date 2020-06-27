@@ -1,3 +1,5 @@
+![sent](nyan.png)
+
 # sent
 
 ...is a simple plaintext presentation tool.
